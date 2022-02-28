@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
 import { loginUser } from "../services/authService";
 
 const Login = () => {
@@ -11,7 +13,12 @@ const Login = () => {
       const { data } = await loginUser(email, password);
 
       localStorage.setItem("token", data["access_token"]);
-      console.log(data["access_token"]);
+      // console.log(data["access_token"]);
+      toast("Login success");
+
+      setTimeout(() => {
+        window.location = "/";
+      }, 600);
     } catch (ex) {
       console.log(ex);
     }
@@ -19,12 +26,13 @@ const Login = () => {
 
   return (
     <div className="row">
+      <ToastContainer />
       <div className="col-md-4"></div>
       <div className="col-md-4">
         <h5>Sign in</h5>
         <form onSubmit={handleLogin}>
           <div class="mb-3">
-            <label htmlFor="exampleInputEmail1" class="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
             </label>
             <input
@@ -32,7 +40,7 @@ const Login = () => {
               name="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              class="form-control"
+              className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
@@ -40,8 +48,8 @@ const Login = () => {
               We'll never share your email with anyone else.
             </div>
           </div>
-          <div class="mb-3">
-            <label htmlFor="exampleInputPassword1" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
@@ -54,7 +62,7 @@ const Login = () => {
             />
           </div>
 
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             Sign in
           </button>
         </form>

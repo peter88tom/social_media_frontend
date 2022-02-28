@@ -19,3 +19,9 @@ export function loginUser(email, password) {
     config
   );
 }
+
+export function logOut() {
+  localStorage.removeItem("token");
+
+  window.location = "/login";
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { signupUser } from "../services/usersService";
 
 const Signup = () => {
@@ -10,7 +11,12 @@ const Signup = () => {
 
     try {
       const { data } = await signupUser(email, password);
-      console.log(data);
+      // console.log(data);
+      toast("Account successfully created");
+
+      setTimeout(() => {
+        window.location = "/login";
+      }, 600);
     } catch (ex) {
       console.log(ex);
     }
@@ -18,6 +24,7 @@ const Signup = () => {
 
   return (
     <div className="row">
+      <ToastContainer />
       <div className="col-md-4"></div>
       <div className="col-md-4">
         <h4>Sign up</h4>
